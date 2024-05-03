@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue1">
+
+    <TextView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Logo"
+        android:fontFamily="@font/olga"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text="Chronolog"
+        android:textSize="48sp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:layout_below="@id/imageViewLogo"
+        android:background="@color/blue2" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_below="@id/linearLayout1"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:background="@color/blue3" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_below="@id/linearLayout2"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:background="@color/blue4" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:layout_above="@id/imageViewLogo"
+        android:background="@color/blue2" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_above="@id/linearLayout4"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:background="@color/blue3" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_above="@id/linearLayout5"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:background="@color/blue4" />
+
+
+</RelativeLayout>
+

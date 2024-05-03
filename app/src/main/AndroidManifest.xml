@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Chronolog_App"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".SignupActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".SlideshowActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".BarChartActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".PieChartActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".LineChartActivity"
+            android:exported="true">
+        </activity>
+
+        <activity android:name=".ViewProjectsActivity">
+
+        </activity>
+
+        <activity android:name=".SetDailyGoalsActivity" />
+        <activity android:name=".FocusReportActivity" />
+        <activity android:name=".StartTimerActivity" />
+
+        <activity android:name=".CreateTaskActivity" />
+        <activity android:name=".EditTaskActivity" />
+        <activity android:name=".TaskActivity" />
+
+        <activity android:name=".LeaderboardActivity"
+            android:label="LeaderboardActivity"/>
+
+        <activity android:name=".ProfileActivity" />
+
+        <activity android:name=".LogAllTasks" />
+        <activity android:name=".LogHours" />
+
+
+    </application>
+
+</manifest>

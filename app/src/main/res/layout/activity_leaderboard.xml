@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/blue4"
+    android:padding="16dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Leaderboard"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/olga"
+            android:gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="10dp"
+        android:layout_below="@id/toolBar">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:fontFamily="@font/condo_black"
+            android:text="Want to climb higher on the leaderboard and stand out among your peers? Achieving a top ranking requires a strategic approach and consistent effort."
+            android:textColor="@color/black"
+            android:background="@drawable/gradient_blue_green"
+            android:textSize="24sp"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <!-- RecyclerView to display leaderboard -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewLeaderboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="8dp"
+        android:layout_below="@id/cardView"
+        android:background="@android:color/white" />
+
+</RelativeLayout>

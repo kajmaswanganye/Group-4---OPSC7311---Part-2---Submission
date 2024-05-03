@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue4"
+    tools:context=".HomeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dashboard"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/olga"
+                android:gravity="center"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/blue1"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="left">
+
+            <!-- Overview Section -->
+            <TextView
+                android:id="@+id/textOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Overview"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:padding="16dp"
+                android:background="@drawable/gradient_blue_green"/>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView1"
+            android:layout_width="300dp"
+            android:layout_height="280dp"
+            app:cardBackgroundColor="@color/blue1"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="left">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <!-- User Information Section -->
+
+                <TextView
+                    android:id="@+id/textUserInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="User Details"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:padding="16dp"
+                    android:background="@drawable/gradient_blue_green"/>
+
+            <TextView
+                android:id="@+id/textUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name: John Doe"
+                android:textColor="@color/black"
+                android:padding="16dp"
+                android:background="@drawable/gradient_blue_green"/>
+
+            <TextView
+                android:id="@+id/textUserEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Email: johndoe@example.com"
+                android:padding="16dp"
+                android:background="@drawable/gradient_blue_green"/>
+
+                <TextView
+                    android:id="@+id/textUserAddress"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:text="Address: 123 Main St, City, Country"
+                    android:padding="16dp"
+                    android:background="@drawable/gradient_blue_green"/>
+
+                <TextView
+                    android:id="@+id/textUserTelephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Telephone: +1234567890"
+                    android:padding="16dp"
+                    android:background="@drawable/gradient_blue_green"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            app:cardBackgroundColor="@color/blue1"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="left">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+        <!-- Work Stats -->
+        <TextView
+            android:id="@+id/textWorkStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Work Stats"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:background="@drawable/gradient_blue_green"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textTotalHours"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total Hours: "
+                android:textColor="@color/black"
+                android:padding="16dp"
+                android:background="@drawable/gradient_blue_green"/>
+
+            <TextView
+                android:id="@+id/textTotalProjectsCompleted"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:text="Total Projects Completed: "
+                android:padding="16dp"
+                android:background="@drawable/gradient_blue_green"/>
+
+        </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
+            app:cardBackgroundColor="@color/blue1"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="left"
+            android:background="@drawable/gradient_blue_green">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+        <!-- Actual Stats -->
+        <TextView
+            android:id="@+id/textActualStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actual Stats"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:background="@drawable/gradient_blue_green"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textTotalHoursWorked"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:text="Total Hours Worked: "
+                android:padding="16dp"
+                android:background="@drawable/gradient_blue_green"/>
+
+            <TextView
+                android:id="@+id/textTotalProjectsCompletedCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:text="Total Projects Completed: "
+                android:padding="16dp"
+                android:background="@drawable/gradient_blue_green"/>
+
+        </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Location Details Section -->
+        <!-- Add relevant UI elements for displaying location details -->
+
+        <!-- Invoices and Financial Section -->
+        <!-- Add UI elements for displaying invoices and financial information -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView4"
+            android:layout_width="350dp"
+            android:layout_height="250dp"
+            app:cardBackgroundColor="@color/blue1"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="left">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Current Focus & Reports -->
+                <TextView
+                    android:id="@+id/textCurrentFocus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Current Focus and Reports"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:padding="16dp"
+                    android:background="@drawable/gradient_blue_green"/>
+
+                <ImageView
+                    android:id="@+id/imageTimer"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:src="@drawable/time"
+                    android:scaleType="centerCrop"
+                    android:padding="16dp" />
+
+                <Button
+                    android:id="@+id/buttonSeeReports"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_margin="20dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/blue3"
+                    android:text="See reports"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView5"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/blue1"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="left">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Invoices and Financial Section -->
+                <TextView
+                    android:id="@+id/textInvoicesFinancial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Invoices and Financial"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:padding="16dp"
+                    android:background="@drawable/gradient_blue_green"/>
+
+                <!-- RecyclerView to display invoices -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewInvoices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp" />
+
+                <!-- Additional TextViews for financial information -->
+                <TextView
+                    android:id="@+id/textTotalIncome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Income: R1000"
+                    android:textColor="@color/black"
+                    android:padding="16dp"
+                    android:background="@drawable/gradient_blue_green"/>
+
+                <TextView
+                    android:id="@+id/textTotalExpenses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Expenses: R500"
+                    android:textColor="@color/black"
+                    android:padding="16dp"
+                    android:background="@drawable/gradient_blue_green"/>
+
+                <!-- Current Balance -->
+                <TextView
+                    android:id="@+id/textCurrentBalance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Current Balance: R500"
+                    android:padding="16dp"
+                    android:background="@drawable/gradient_blue_green"/>
+
+                <!-- Transaction History -->
+                <TextView
+                    android:id="@+id/textTransactionHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Transaction History"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/gradient_blue_green"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewTransactions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp" />
+
+                <!-- Pending Offers Section -->
+                <TextView
+                    android:id="@+id/textPendingOffers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pending Offers"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/gradient_blue_green"/>
+
+                <!-- RecyclerView for displaying pending offers -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewPendingOffers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView6"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/blue1"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="left">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Collaboration Section Hub -->
+            <TextView
+                android:id="@+id/textCollaborationSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Collaboration/ Team Projects"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:padding="16dp"
+                android:background="@drawable/gradient_blue_green"/>
+
+            <!-- RecyclerView for displaying projects -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewProjects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp" />
+
+        </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

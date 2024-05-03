@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue4"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reports"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/olga"
+                android:gravity="center"/>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    <!-- Date Range Selector -->
+    <TextView
+        android:id="@+id/textViewDateRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Date Range:"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_below="@id/toolBar"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/buttonSelectDateRange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select"
+        android:layout_below="@id/textViewDateRange"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/blue3"
+        android:shadowColor="#FFFFFF"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:fontFamily="@font/olga"/>
+
+    <!-- Timesheet List View -->
+    <ListView
+        android:id="@+id/listViewTimesheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonSelectDateRange"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Category Report -->
+    <TextView
+        android:id="@+id/textViewCategoryReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category Report:"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_below="@id/listViewTimesheet"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewCategoryReportData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewCategoryReport"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Work Hour Graph -->
+    <TextView
+        android:id="@+id/textViewWorkHourGraph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Work Hour Graph:"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_below="@id/textViewCategoryReportData"
+        android:layout_marginTop="16dp"/>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChartWorkHour"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/textViewWorkHourGraph"
+        android:layout_marginTop="8dp"/>
+
+    </RelativeLayout>
+
+</ScrollView>
