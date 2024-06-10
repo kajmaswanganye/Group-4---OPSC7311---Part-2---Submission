@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class LogHours : AppCompatActivity() {
 
@@ -15,6 +17,7 @@ class LogHours : AppCompatActivity() {
     private lateinit var elapsedTimeText: TextView
     private lateinit var startButton: Button
     private lateinit var stopButton: Button
+    private lateinit var saveButton: Button
 
     private var timeSaved = ""
 
@@ -23,15 +26,21 @@ class LogHours : AppCompatActivity() {
     private var startTime: Long = 0
     private var elapsedTime: Long = 0
 
+    private lateinit var database: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_hours)
+
+        // Initialize Firebase database
+        database = FirebaseDatabase.getInstance().reference
 
         // Initialize views
         timerText = findViewById(R.id.timer_text)
         elapsedTimeText = findViewById(R.id.elapsed_time_text)
         startButton = findViewById(R.id.start_button)
         stopButton = findViewById(R.id.stop_button)
+        saveButton = findViewById(R.id.save_button)
 
         startButton.setOnClickListener {
             startTimer()
@@ -39,6 +48,10 @@ class LogHours : AppCompatActivity() {
 
         stopButton.setOnClickListener {
             stopTimer()
+        }
+
+        saveButton.setOnClickListener {
+            saveTimer()
         }
     }
 
@@ -49,6 +62,7 @@ class LogHours : AppCompatActivity() {
             isTimerRunning = true
             startButton.isEnabled = false
             stopButton.isEnabled = true
+            saveButton.isEnabled = false
         }
     }
 
@@ -58,6 +72,7 @@ class LogHours : AppCompatActivity() {
         elapsedTime = System.currentTimeMillis() - startTime
         startButton.isEnabled = true
         stopButton.isEnabled = false
+        saveButton.isEnabled = true
         timeSaved = timerText.text.toString() // Store the formatted time string
         elapsedTimeText.text = timeSaved // Set the text at the bottom TextView
         val time = timerText.text.toString()
@@ -83,4 +98,38 @@ class LogHours : AppCompatActivity() {
         timerText.text = timeString
     }
 
+    private fun saveTimer() {
+        val endTime = System.currentTimeMillis()
+        val duration = elapsedTime / 1000 // duration in seconds
+        val startTimeFormatted = java.text.SimpleDateFormat("HH:mm:ss").format(startTime)
+        val endTimeFormatted = java.text.SimpleDateFormat("HH:mm:ss").format(endTime)
+
+        val taskData = mapOf(
+            "startTime" to startTimeFormatted,
+            "duration" to duration,
+            "endTime" to endTimeFormatted
+        )
+
+        database.child("tasks").push().setValue(taskData)
+            .addOnSuccessListener {
+                // Data saved successfully
+                showDialog("Task logged successfully.")
+            }
+            .addOnFailureListener { e ->
+                // Failed to save data
+                showDialog("Failed to log task: ${e.message}")
+            }
+    }
+
+    private fun showDialog(message: String) {
+        // Create an AlertDialog
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setTitle("Message")
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ ->
+                // Dismiss the dialog when OK button is clicked
+                dialog.dismiss()
+            }
+            .show()
+    }
 }

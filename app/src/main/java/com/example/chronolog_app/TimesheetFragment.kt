@@ -11,6 +11,8 @@ import android.view.*
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class TimesheetFragment : Fragment() {
 
@@ -19,6 +21,7 @@ class TimesheetFragment : Fragment() {
     private val categorySet = mutableSetOf<String>()
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var totalHoursTextView: TextView
+    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,8 +31,9 @@ class TimesheetFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_timesheet, container, false)
 
         parentLayout = view.findViewById(R.id.Category_parent_layout)
-
         totalHoursTextView = TextView(requireContext())
+
+        database = FirebaseDatabase.getInstance().reference
 
         restoreCategories()
 
@@ -62,15 +66,14 @@ class TimesheetFragment : Fragment() {
     }
 
     private fun restoreCategories() {
-        val sharedPreferences =
-            requireContext().getSharedPreferences("CategoryData", Context.MODE_PRIVATE)
-        val count = sharedPreferences.getInt("categoryCount", 0)
-        for (i in 1..count) {
-            val categoryName = sharedPreferences.getString("categoryName_$i", "") ?: ""
-            if (categoryName.isNotEmpty()) {
+        database.child("categories").get().addOnSuccessListener { snapshot ->
+            snapshot.children.forEach { categorySnapshot ->
+                val categoryName = categorySnapshot.key ?: return@forEach
                 categorySet.add(categoryName)
                 createButtonSetCategory(categoryName)
             }
+        }.addOnFailureListener {
+            Log.e("Firebase", "Error getting categories", it)
         }
     }
 
@@ -209,6 +212,9 @@ class TimesheetFragment : Fragment() {
         buttonSetLayout.addView(buttonsLayout)
         categoryCardView.addView(buttonSetLayout)
         parentLayout.addView(categoryCardView)
+
+        // Save category to Firebase
+        database.child("categories").child(categoryName).setValue(true)
     }
 
     private fun updateTotalHoursText(hours: Int) {
@@ -240,20 +246,11 @@ class TimesheetFragment : Fragment() {
     }
 
     private fun removeCategory(categoryName: String, categoryCardViewId: Int) {
-        val sharedPreferences =
-            requireContext().getSharedPreferences("CategoryData", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        val count = sharedPreferences.getInt("categoryCount", 0)
-        for (i in 1..count) {
-            val savedCategoryName = sharedPreferences.getString("categoryName_$i", "") ?: ""
-            if (savedCategoryName == categoryName) {
-                editor.remove("categoryName_$i")
-                editor.remove("categoryImage_$categoryCardViewId")
-                editor.apply()
-                categorySet.remove(categoryName)
-                parentLayout.removeView(requireActivity().findViewById(categoryCardViewId))
-                break
-            }
+        database.child("categories").child(categoryName).removeValue().addOnSuccessListener {
+            categorySet.remove(categoryName)
+            parentLayout.removeView(requireActivity().findViewById(categoryCardViewId))
+        }.addOnFailureListener {
+            Log.e("Firebase", "Error removing category", it)
         }
     }
 
@@ -265,16 +262,13 @@ class TimesheetFragment : Fragment() {
             val imageView =
                 parentLayout.findViewWithTag("image_view_$categoryCardViewCounter") as ImageView
             imageView.setImageURI(selectedImageUri)
-            // Save the image URI to SharedPreferences
+            // Save the image URI to Firebase
             saveImageUri(selectedImageUri.toString(), categoryCardViewCounter.toString())
         }
     }
 
     private fun saveImageUri(imageUri: String, categoryCardViewCounter: String) {
-        val sharedPreferences =
-            requireContext().getSharedPreferences("CategoryData", Context.MODE_PRIVATE)
-        sharedPreferences.edit().putString("categoryImage_$categoryCardViewCounter", imageUri)
-            .apply()
+        database.child("images").child(categoryCardViewCounter).setValue(imageUri)
     }
 
     private fun showDialog(message: String) {

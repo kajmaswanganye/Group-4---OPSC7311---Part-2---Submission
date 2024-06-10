@@ -7,37 +7,44 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var editTextEmail: EditText
-    private lateinit var editTextPassword: EditText
+    private lateinit var loginUsername: EditText
+    private lateinit var loginPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var tvForgotPassword: TextView
     private lateinit var tvSignUp: TextView
+
+    private lateinit var firebaseDatabase: FirebaseDatabase
+    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        editTextEmail = findViewById(R.id.editTextLoginEmail)
-        editTextPassword = findViewById(R.id.editTextLoginPassword)
+        firebaseDatabase = FirebaseDatabase.getInstance()
+        databaseReference = firebaseDatabase.reference.child("users")
+
+        loginUsername = findViewById(R.id.loginUsername)
+        loginPassword = findViewById(R.id.loginPassword)
         btnLogin = findViewById(R.id.btnlogin)
         tvForgotPassword = findViewById(R.id.tvRecoverPassword)
         tvSignUp = findViewById(R.id.tvAlreadyAUser)
 
         btnLogin.setOnClickListener {
-            val email = editTextEmail.text.toString().trim()
-            val password = editTextPassword.text.toString()
+            val username = loginUsername.text.toString().trim()
+            val password = loginPassword.text.toString()
 
-            if (validateInputs(email, password)) {
-                // Perform login process (e.g., send data to server or check locally)
-                // For demo, display a toast message
-                Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
-
-                // Example: Navigate to HomeActivity after successful login
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+            if (username.isNotEmpty() && password.isNotEmpty()) {
+                loginUser(username, password)
+            } else {
+                Toast.makeText(this@LoginActivity, "All fields are mandatory", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -48,21 +55,34 @@ class LoginActivity : AppCompatActivity() {
 
         tvSignUp.setOnClickListener {
             // Navigate to SignupActivity when "New user? Sign up" is clicked
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, SignupActivity::class.java))
         }
     }
 
-    private fun validateInputs(email: String, password: String): Boolean {
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.error = "Enter a valid email address"
-            return false
-        }
+    private fun loginUser(username: String, password: String) {
+        databaseReference.orderByChild("username").equalTo(username)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        for (userSnapshot in dataSnapshot.children) {
+                            val userData = userSnapshot.getValue(UserData::class.java)
 
-        if (password.isEmpty()) {
-            editTextPassword.error = "Enter a password"
-            return false
-        }
+                            if (userData != null && userData.password == password) {
+                                Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                finish()
+                                return
+                            }
+                        }
+                        Toast.makeText(this@LoginActivity, "Login failed: Incorrect password", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Login failed: User not found", Toast.LENGTH_SHORT).show()
+                    }
+                }
 
-        return true
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Toast.makeText(this@LoginActivity, "Database Error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 }

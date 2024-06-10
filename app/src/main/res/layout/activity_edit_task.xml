@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/blue4"
-    tools:context=".EditTask">
+    tools:context=".EditTaskActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -27,7 +27,7 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -59,8 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:hint="Enter Minimum Hours"
-                />
+                android:hint="Enter Minimum Hours" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -73,8 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:hint="Enter Maximum Hours"
-                />
+                android:hint="Enter Maximum Hours" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -87,8 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:hint="Enter Estimated Hours"
-                />
+                android:hint="Enter Estimated Hours" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -103,21 +100,20 @@
                 android:inputType="textMultiLine"
                 android:minLines="3"
                 android:maxLines="5"
-                android:hint="Enter Task Description"
-                />
+                android:hint="Enter Task Description" />
 
             <Button
-                android:id="@+id/btnSaveTask"
+                android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:text="Save Task"
                 android:textColor="#000000"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:onClick="saveTaskData" />
 
         </LinearLayout>
 
     </ScrollView>
-
 
 </LinearLayout>

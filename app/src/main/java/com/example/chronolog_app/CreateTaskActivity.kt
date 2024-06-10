@@ -1,11 +1,13 @@
 package com.example.chronolog_app
+
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class CreateTaskActivity: AppCompatActivity() {
 
@@ -16,12 +18,15 @@ class CreateTaskActivity: AppCompatActivity() {
     private lateinit var etDescription: EditText
     private lateinit var btnSaveTask: Button
 
+    private lateinit var database: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_task)
 
+        // Initialize Firebase database
+        database = FirebaseDatabase.getInstance().reference
 
-        val taskId = intent.getIntExtra("taskId", 0) // Retrieve taskId from intent extras
         calendarView = findViewById(R.id.calendarView)
         etMinHours = findViewById(R.id.etMinHours)
         etMaxHours = findViewById(R.id.etMaxHours)
@@ -29,28 +34,49 @@ class CreateTaskActivity: AppCompatActivity() {
         etDescription = findViewById(R.id.etDescription)
         btnSaveTask = findViewById(R.id.btnSaveTask)
 
-
         btnSaveTask.setOnClickListener {
-            saveTask(taskId) // Pass taskId to saveTask method
+            saveTask()
         }
     }
 
-    private fun saveTask(taskId: Int) { // Receive taskId as a parameter
-        val sharedPreferences = getSharedPreferences("TaskData", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-
+    private fun saveTask() {
         val taskDate = calendarView.date
         val minHours = etMinHours.text.toString().toDoubleOrNull() ?: 0.0
         val maxHours = etMaxHours.text.toString().toDoubleOrNull() ?: 0.0
         val estimatedHours = etEstimatedHours.text.toString().toDoubleOrNull() ?: 0.0
         val description = etDescription.text.toString()
 
-        // Save task data to SharedPreferences with taskId as part of the key
-        editor.putLong("taskDate_$taskId", taskDate)
-        editor.putFloat("minHours_$taskId", minHours.toFloat())
-        editor.putFloat("maxHours_$taskId", maxHours.toFloat())
-        editor.putFloat("estimatedHours_$taskId", estimatedHours.toFloat())
-        editor.putString("description_$taskId", description)
-        editor.apply()
+        // Create a unique ID for each task
+        val taskId = database.child("tasks").push().key ?: return
+
+        val taskData = mapOf(
+            "taskDate" to taskDate,
+            "minHours" to minHours,
+            "maxHours" to maxHours,
+            "estimatedHours" to estimatedHours,
+            "description" to description
+        )
+
+        database.child("tasks").child(taskId).setValue(taskData)
+            .addOnSuccessListener {
+                // Data saved successfully
+                showDialog("Task saved successfully.")
+            }
+            .addOnFailureListener { e ->
+                // Failed to save data
+                showDialog("Failed to save task: ${e.message}")
+            }
+    }
+
+    private fun showDialog(message: String) {
+        // Create an AlertDialog
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setTitle("Message")
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ ->
+                // Dismiss the dialog when OK button is clicked
+                dialog.dismiss()
+            }
+            .show()
     }
 }
