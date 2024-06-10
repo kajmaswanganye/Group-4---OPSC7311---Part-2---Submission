@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "94578506128",
+    "project_id": "chronolog-ca658",
+    "storage_bucket": "chronolog-ca658.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94578506128:android:38c20d786c3c6be7481b15",
+        "android_client_info": {
+          "package_name": "com.example.chronolog_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWoTBEDipW4HcJ45G4i39pA3hPTo13Fm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
